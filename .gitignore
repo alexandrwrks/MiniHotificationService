@@ -1,0 +1,8 @@
+__pycache__
+.env
+.venv
+.idea
+.todo
+.env.docker
+notifications.db*
+.uv-cache/

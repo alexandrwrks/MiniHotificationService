@@ -1,0 +1,85 @@
+x-app: &app
+  build: .
+  image: mini-notification-service:local
+  environment: &app-environment
+    BOT_TOKEN: ${BOT_TOKEN:?Set BOT_TOKEN in .env}
+    DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-notifications}:${POSTGRES_PASSWORD:-notifications}@mini-orders-db:5432/${POSTGRES_DB:-notifications}
+    RABBITMQ_URL: amqp://guest:${RABBITMQ_PASSWORD:-guest}@rabbitmq:5672/
+  restart: unless-stopped
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
+    ports:
+      - "127.0.0.1:15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+
+  mini-orders-db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-notifications}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-notifications}
+      POSTGRES_DB: ${POSTGRES_DB:-notifications}
+    volumes:
+      - mini_orders_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  db-init:
+    <<: *app
+    command: ["python", "-m", "database.init"]
+    restart: "no"
+    depends_on:
+      mini-orders-db:
+        condition: service_healthy
+
+  api:
+    <<: *app
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/openapi.json', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+
+  bot:
+    <<: *app
+    command: ["python", "-m", "bot.main"]
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+
+  consumer:
+    <<: *app
+    command: ["python", "-m", "consumer.main"]
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_healthy
+
+volumes:
+  rabbitmq_data:
+  mini_orders_db:

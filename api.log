@@ -1,0 +1,120 @@
+2026-11-01T22:45:36.529382+0700 | ERROR | Не удалось отправить заказ в Telegram
+[33m[1mTraceback (most recent call last):[0m
+
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+
+  File "[32mC:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Scripts\uvicorn.exe\[0m[32m[1m__main__.py[0m", line [33m10[0m, in [35m<module>[0m
+
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\click\core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+           │    │     │       └ {}
+           │    │     └ ()
+           │    └ <function Command.main at 0x0000021DB93083B0>
+           └ <Command main>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\click\core.py", line 1552, in main
+    rv = self.invoke(ctx)
+         │    │      └ <click.core.Context object at 0x0000021DB93A9010>
+         │    └ <function Command.invoke at 0x0000021DB9307D70>
+         └ <Command main>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\click\core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           │   │      │    │           │   └ {'port': 8001, 'app': 'consumer.main:app', 'host': '127.0.0.1', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), ...
+           │   │      │    │           └ <click.core.Context object at 0x0000021DB93A9010>
+           │   │      │    └ <function main at 0x0000021DB9418B40>
+           │   │      └ <Command main>
+           │   └ <function Context.invoke at 0x0000021DB9305DD0>
+           └ <click.core.Context object at 0x0000021DB93A9010>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\click\core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+           │         │       └ {'port': 8001, 'app': 'consumer.main:app', 'host': '127.0.0.1', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), ...
+           │         └ ()
+           └ <function main at 0x0000021DB9418B40>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\uvicorn\main.py", line 448, in main
+    run(
+    └ <function run at 0x0000021DB94050C0>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\uvicorn\main.py", line 632, in run
+    server.run()
+    │      └ <function Server.run at 0x0000021DB935A820>
+    └ <uvicorn.server.Server object at 0x0000021DC37B1BE0>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\uvicorn\server.py", line 86, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x0000021DB914D590>
+           │           │    │             │                      │    └ <uvicorn.config.Config object at 0x0000021DB93A92B0>
+           │           │    │             │                      └ <uvicorn.server.Server object at 0x0000021DC37B1BE0>
+           │           │    │             └ None
+           │           │    └ <function Server.serve at 0x0000021DB935A980>
+           │           └ <uvicorn.server.Server object at 0x0000021DC37B1BE0>
+           └ <function run at 0x0000021DB8F0CB40>
+  File "C:\Users\Acer\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x0000021DC3822A70>
+           │      └ <function Runner.run at 0x0000021DB8F0D0C0>
+           └ <asyncio.runners.Runner object at 0x0000021DC37B1FD0>
+  File "C:\Users\Acer\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\s...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x0000021DB8EFD430>
+           │    └ <ProactorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x0000021DC37B1FD0>
+  File "C:\Users\Acer\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x0000021DB8EFD380>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\Acer\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000021DB8EFF480>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+  File "C:\Users\Acer\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\base_events.py", line 2057, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000021DB8E673D0>
+    └ <Handle Task.task_wakeup()>
+  File "C:\Users\Acer\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup()>
+
+> File "[32mC:\Users\Acer\PycharmProjects\MiniHotificationService\consumer\[0m[32m[1mconsumer.py[0m", line [33m22[0m, in [35mprocess_order[0m
+    [35m[1mawait[0m [1msend_telegram_message[0m[1m([0m[1mpydantic_data[0m[1m)[0m
+    [36m      │                     └ [0m[36m[1m[ProductSchema(id=0, name='string', price=0.0)][0m
+    [36m      └ [0m[36m[1m<function send_telegram_message at 0x0000021DC35C1170>[0m
+
+  File "[32mC:\Users\Acer\PycharmProjects\MiniHotificationService\bot\[0m[32m[1mconsumer.py[0m", line [33m21[0m, in [35msend_telegram_message[0m
+    [35m[1mawait[0m [1mbot[0m[35m[1m.[0m[1msend_message[0m[1m([0m
+    [36m      │   └ [0m[36m[1m<function Bot.send_message at 0x0000021DC35B6C40>[0m
+    [36m      └ [0m[36m[1m<aiogram.client.bot.Bot object at 0x0000021DC3699D30>[0m
+
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\aiogram\client\bot.py", line 3013, in send_message
+    return await self(call, request_timeout=request_timeout)
+                 │    │                     └ None
+                 │    └ SendMessage(chat_id=9123692270, text='Новый заказ: \n        \nID: 0\nName: string\nPrice: 0.0\n        ', business_connectio...
+                 └ <aiogram.client.bot.Bot object at 0x0000021DC3699D30>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\aiogram\client\bot.py", line 515, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+                 │    │       │     │               └ None
+                 │    │       │     └ SendMessage(chat_id=9123692270, text='Новый заказ: \n        \nID: 0\nName: string\nPrice: 0.0\n        ', business_connectio...
+                 │    │       └ <aiogram.client.bot.Bot object at 0x0000021DC3699D30>
+                 │    └ <aiogram.client.session.aiohttp.AiohttpSession object at 0x0000021DC3699E80>
+                 └ <aiogram.client.bot.Bot object at 0x0000021DC3699D30>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\aiogram\client\session\base.py", line 259, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+           │    │                   │          │    └ SendMessage(chat_id=9123692270, text='Новый заказ: \n        \nID: 0\nName: string\nPrice: 0.0\n        ', business_connectio...
+           │    │                   │          └ <aiogram.client.bot.Bot object at 0x0000021DC3699D30>
+           │    │                   └ functools.partial(<bound method AiohttpSession.make_request of <aiogram.client.session.aiohttp.AiohttpSession object at 0x000...
+           │    └ ~TelegramType
+           └ <function cast at 0x0000021DB90D9FE0>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    response = self.check_response(
+               │    └ <function BaseSession.check_response at 0x0000021DC35A22A0>
+               └ <aiogram.client.session.aiohttp.AiohttpSession object at 0x0000021DC3699E80>
+  File "C:\Users\Acer\PycharmProjects\MiniHotificationService\.venv\Lib\site-packages\aiogram\client\session\base.py", line 135, in check_response
+    raise TelegramServerError(method=method, message=description)
+          │                          │               └ 'Internal Server Error'
+          │                          └ SendMessage(chat_id=9123692270, text='Новый заказ: \n        \nID: 0\nName: string\nPrice: 0.0\n        ', business_connectio...
+          └ <class 'aiogram.exceptions.TelegramServerError'>
+
+[31m[1maiogram.exceptions.TelegramServerError[0m:[1m Telegram server says - Internal Server Error[0m

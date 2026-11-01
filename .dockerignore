@@ -1,0 +1,13 @@
+.git
+.venv
+.uv-cache
+.idea
+.agents
+.codex
+.env
+.env.*
+__pycache__
+*.pyc
+*.log
+*.db
+*.db-*

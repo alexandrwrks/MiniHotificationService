@@ -1,0 +1,18 @@
+[project]
+name = "minihotificationservice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiosqlite>=0.20.0",
+    "asyncpg>=0.29.0",
+    "aio-pika>=10.2.1",
+    "aiogram>=3.31.0",
+    "fastapi>=0.162.0",
+    "loguru>=0.7.3",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.16.2",
+    "sqlalchemy[asyncio]>=2.1.6",
+    "uvicorn>=0.54.0",
+]
